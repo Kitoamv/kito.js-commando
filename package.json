@@ -24,7 +24,7 @@
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/discord.js-commando/-/discord.js-commando-0.10.0.tgz",
+  "_resolved": "https://github.com/Kitoamv/kito.js-commando",
   "_spec": "0.10.0",
   "_where": "C:\\Users\\Kirito Amv's\\Desktop\\Suzuki",
   "author": {
@@ -33,7 +33,7 @@
     "url": "https://gawdl3y.com/"
   },
   "bugs": {
-    "url": "https://github.com/discordjs/Commando/issues"
+    "url": "https://github.com/Kitoamv/kito.js-commando"
   },
   "dependencies": {
     "common-tags": "^1.0.0",
@@ -50,7 +50,7 @@
   "engines": {
     "node": ">=7.6.0"
   },
-  "homepage": "https://github.com/kito.js-commando/Commando#readme",
+  "homepage": "https://github.com/Kitoamv/kito.js-commando",
   "keywords": [
     "discord",
     "bot",
@@ -65,7 +65,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kito.js-commando/Commando.git"
+    "url": "git+https://github.com/Kitoamv/kito.js-commando"
   },
   "scripts": {
     "docs": "docgen --source src --custom docs/index.yml --output docs/docs.json",
