@@ -16,7 +16,7 @@ class BooleanArgumentType extends ArgumentType {
 		const lc = value.toLowerCase();
 		if(this.truthy.has(lc)) return true;
 		if(this.falsy.has(lc)) return false;
-		throw new RangeError('Unknown boolean value.');
+		throw new RangeError('Valor booleano desconhecido.');
 	}
 }
 
