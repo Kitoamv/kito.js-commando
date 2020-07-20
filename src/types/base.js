@@ -5,9 +5,9 @@ class ArgumentType {
 	 * @param {string} id - The argument type ID (this is what you specify in {@link ArgumentInfo#type})
 	 */
 	constructor(client, id) {
-		if(!client) throw new Error('A client must be specified.');
-		if(typeof id !== 'string') throw new Error('Argument type ID must be a string.');
-		if(id !== id.toLowerCase()) throw new Error('Argument type ID must be lowercase.');
+		if(!client) throw new Error('Um cliente deve ser especificado.');
+		if(typeof id !== 'string') throw new Error('O ID do tipo de argumento deve ser uma sequência.');
+		if(id !== id.toLowerCase()) throw new Error('O ID do tipo de argumento deve estar em minúsculas.');
 
 		/**
 		 * Client that this argument type is for
@@ -34,7 +34,7 @@ class ArgumentType {
 	 * @abstract
 	 */
 	validate(value, msg, arg) { // eslint-disable-line no-unused-vars
-		throw new Error(`${this.constructor.name} doesn't have a validate() method.`);
+		throw new Error(`${this.constructor.name} não possui um método validate ().`);
 	}
 
 	// eslint-disable-next-line valid-jsdoc
@@ -47,7 +47,7 @@ class ArgumentType {
 	 * @abstract
 	 */
 	parse(value, msg, arg) { // eslint-disable-line no-unused-vars
-		throw new Error(`${this.constructor.name} doesn't have a parse() method.`);
+		throw new Error(`${this.constructor.name} não possui um método parse ().`);
 	}
 
 	/**
