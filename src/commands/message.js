@@ -105,7 +105,7 @@ class CommandMessage {
 			case 'multiple':
 				return this.constructor.parseArgs(this.argString, this.command.argsCount, this.command.argsSingleQuotes);
 			default:
-				throw new RangeError(`Unknown argsType "${this.argsType}".`);
+				throw new RangeError(`Args desconhecidos Tipo "${this.argsType}".`);
 		}
 	}
 
@@ -130,12 +130,12 @@ class CommandMessage {
 			 * (built-in reasons are `guildOnly`, `permission`, and `throttling`)
 			 */
 			this.client.emit('commandBlocked', this, 'guildOnly');
-			return this.reply(`o \`${this.command.name}\` O comando deve ser usado em um canal do servidor.`);
+			return this.reply(`O \`${this.command.name}\` O comando deve ser usado em um canal do servidor.`);
 		}
 
 		if(this.command.nsfw && !this.message.channel.nsfw) {
 			this.client.emit('commandBlocked', this, 'nsfw');
-			return this.reply(`o \`${this.command.name}\` O comando pode ser usado apenas nos canais NSFW.`);
+			return this.reply(`O \`${this.command.name}\` O comando pode ser usado apenas nos canais NSFW.`);
 		}
 
 		// Ensure the user has permission to use the command
@@ -212,7 +212,7 @@ class CommandMessage {
 			const retVal = await promise;
 			if(!(retVal instanceof discord.Message || retVal instanceof Array || retVal === null || retVal === undefined)) {
 				throw new TypeError(oneLine`
-					Comando ${this.command.name}'s run()resolvido com um tipo desconhecido
+					Comando ${this.command.name}'s run () resolvido com um tipo desconhecido
 					(${retVal !== null ? retVal && retVal.constructor ? retVal.constructor.name : typeof retVal : null}).
 					Os métodos de execução de comando devem retornar uma promessa que seja resolvida com uma mensagem, matriz de mensagens ou nula/indefinida.
 				`);
