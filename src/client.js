@@ -76,13 +76,13 @@ class CommandoClient extends discord.Client {
 				if(options.owner instanceof Array || options.owner instanceof Set) {
 					for(const owner of options.owner) {
 						this.fetchUser(owner).catch(err => {
-							this.emit('warn', `Unable to fetch owner ${owner}.`);
+							this.emit('warn', `Não foi possível buscar o proprietário ${owner}.`);
 							this.emit('error', err);
 						});
 					}
 				} else {
 					this.fetchUser(options.owner).catch(err => {
-						this.emit('warn', `Unable to fetch owner ${options.owner}.`);
+						this.emit('warn', `Não foi possível buscar o proprietário ${options.owner}.`);
 						this.emit('error', err);
 					});
 				}
@@ -146,16 +146,16 @@ class CommandoClient extends discord.Client {
 		this.provider = provider;
 
 		if(this.readyTimestamp) {
-			this.emit('debug', `Provider set to ${provider.constructor.name} - initialising...`);
+			this.emit('debug', `Fornecedor definido como ${provider.constructor.name} - inicializando...`);
 			await provider.init(this);
 			this.emit('debug', 'Provider finished initialisation.');
 			return undefined;
 		}
 
-		this.emit('debug', `Provider set to ${provider.constructor.name} - will initialise once ready.`);
+		this.emit('debug', `Fornecedor definido como ${provider.constructor.name} - inicializará uma vez pronto.`);
 		await new Promise(resolve => {
 			this.once('ready', () => {
-				this.emit('debug', `Initialising provider...`);
+				this.emit('debug', `Inicializando provedor...`);
 				resolve(provider.init(this));
 			});
 		});
@@ -166,7 +166,7 @@ class CommandoClient extends discord.Client {
 		 * @param {SettingsProvider} provider - Provider that was initialised
 		 */
 		this.emit('providerReady', provider);
-		this.emit('debug', 'Provider finished initialisation.');
+		this.emit('debug', 'Inicialização concluída pelo provedor.');
 		return undefined;
 	}
 
