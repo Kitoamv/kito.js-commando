@@ -10,10 +10,10 @@ class IntegerArgumentType extends ArgumentType {
 		if(Number.isNaN(int)) return false;
 		if(arg.oneOf && !arg.oneOf.includes(int)) return false;
 		if(arg.min !== null && typeof arg.min !== 'undefined' && int < arg.min) {
-			return `Please enter a number above or exactly ${arg.min}.`;
+			return `Digite um número acima ou exatamente ${arg.min}.`;
 		}
 		if(arg.max !== null && typeof arg.max !== 'undefined' && int > arg.max) {
-			return `Please enter a number below or exactly ${arg.max}.`;
+			return `Digite um número abaixo ou exatamente ${arg.max}.`;
 		}
 		return true;
 	}
