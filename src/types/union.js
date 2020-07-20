@@ -16,7 +16,7 @@ class ArgumentUnionType extends ArgumentType {
 		const typeIDs = id.split('|');
 		for(const typeID of typeIDs) {
 			const type = client.registry.types.get(typeID);
-			if(!type) throw new Error(`Argument type "${typeID}" is not registered.`);
+			if(!type) throw new Error(`Tipo de argumento "${typeID}" não está registrado.`);
 			this.types.push(type);
 		}
 	}
@@ -36,7 +36,7 @@ class ArgumentUnionType extends ArgumentType {
 		for(let i = 0; i < results.length; i++) {
 			if(results[i] && typeof results[i] !== 'string') return this.types[i].parse(value, msg, arg);
 		}
-		throw new Error(`Couldn't parse value "${value}" with union type ${this.id}.`);
+		throw new Error(`Não foi possível analisar o valor "${value}" com tipo de união ${this.id}.`);
 	}
 
 	isEmpty(value, msg, arg) {
