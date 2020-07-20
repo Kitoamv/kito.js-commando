@@ -243,7 +243,7 @@ class Command {
 					return `O \`${this.name}\` comando requer que você tenha o "${permissions[missing[0]]}" permissão.`;
 				}
 				return oneLine`
-					O \`${this.name}\` O comando requer que você tenha as seguintes permissões:
+					O \`${this.name}\` comando requer que você tenha as seguintes permissões:
 					${missing.map(perm => permissions[perm]).join(', ')}
 				`;
 			}
@@ -266,7 +266,7 @@ class Command {
 	 * @abstract
 	 */
 	async run(message, args, fromPattern) { // eslint-disable-line no-unused-vars, require-await
-		throw new Error(`${this.constructor.name} não possui um método run ().`);
+		throw new Error(`${this.constructor.name} não possui um método run().`);
 	}
 
 	/**
@@ -415,68 +415,68 @@ class Command {
 	 * @private
 	 */
 	static validateInfo(client, info) { // eslint-disable-line complexity
-		if(!client) throw new Error('A client must be specified.');
-		if(typeof info !== 'object') throw new TypeError('Command info must be an Object.');
-		if(typeof info.name !== 'string') throw new TypeError('Command name must be a string.');
-		if(info.name !== info.name.toLowerCase()) throw new Error('Command name must be lowercase.');
+		if(!client) throw new Error('Um cliente deve ser especificado.');
+		if(typeof info !== 'object') throw new TypeError('As informações do comando devem ser um objeto.');
+		if(typeof info.name !== 'string') throw new TypeError('O nome do comando deve ser uma sequência.');
+		if(info.name !== info.name.toLowerCase()) throw new Error('O nome do comando deve estar em minúsculas.');
 		if(info.aliases && (!Array.isArray(info.aliases) || info.aliases.some(ali => typeof ali !== 'string'))) {
-			throw new TypeError('Command aliases must be an Array of strings.');
+			throw new TypeError('Os aliases de comando devem ser uma matriz de cadeias.');
 		}
 		if(info.aliases && info.aliases.some(ali => ali !== ali.toLowerCase())) {
-			throw new Error('Command aliases must be lowercase.');
+			throw new Error('Os aliases de comando devem estar em minúsculas.');
 		}
-		if(typeof info.group !== 'string') throw new TypeError('Command group must be a string.');
-		if(info.group !== info.group.toLowerCase()) throw new Error('Command group must be lowercase.');
-		if(typeof info.memberName !== 'string') throw new TypeError('Command memberName must be a string.');
-		if(info.memberName !== info.memberName.toLowerCase()) throw new Error('Command memberName must be lowercase.');
-		if(typeof info.description !== 'string') throw new TypeError('Command description must be a string.');
-		if('format' in info && typeof info.format !== 'string') throw new TypeError('Command format must be a string.');
-		if('details' in info && typeof info.details !== 'string') throw new TypeError('Command details must be a string.');
+		if(typeof info.group !== 'string') throw new TypeError('O grupo de comandos deve ser uma sequência.');
+		if(info.group !== info.group.toLowerCase()) throw new Error('O grupo de comandos deve estar em minúsculas.');
+		if(typeof info.memberName !== 'string') throw new TypeError('O comando memberName deve ser uma sequência.');
+		if(info.memberName !== info.memberName.toLowerCase()) throw new Error('O comando memberName deve estar em minúsculas.');
+		if(typeof info.description !== 'string') throw new TypeError('A descrição do comando deve ser uma sequência.');
+		if('format' in info && typeof info.format !== 'string') throw new TypeError('O formato do comando deve ser uma sequência.');
+		if('details' in info && typeof info.details !== 'string') throw new TypeError('Os detalhes do comando devem ser uma sequência.');
 		if(info.examples && (!Array.isArray(info.examples) || info.examples.some(ex => typeof ex !== 'string'))) {
-			throw new TypeError('Command examples must be an Array of strings.');
+			throw new TypeError('Exemplos de comando devem ser uma matriz de seqüências de caracteres.');
 		}
 		if(info.clientPermissions) {
 			if(!Array.isArray(info.clientPermissions)) {
-				throw new TypeError('Command clientPermissions must be an Array of permission key strings.');
+				throw new TypeError('O comando Permissão de Cliente deve ser uma matriz de cadeias de chaves de permissão.');
 			}
 			for(const perm of info.clientPermissions) {
-				if(!permissions[perm]) throw new RangeError(`Invalid command clientPermission: ${perm}`);
+				if(!permissions[perm]) throw new RangeError(`Comando inválido Permissão de Cliente: ${perm}`);
 			}
 		}
 		if(info.userPermissions) {
 			if(!Array.isArray(info.userPermissions)) {
-				throw new TypeError('Command userPermissions must be an Array of permission key strings.');
+				throw new TypeError('O comando Permissão de Usuário deve ser uma matriz de cadeias de chaves de permissão.');
 			}
 			for(const perm of info.userPermissions) {
-				if(!permissions[perm]) throw new RangeError(`Invalid command userPermission: ${perm}`);
+				if(!permissions[perm]) throw new RangeError(`Comando inválido Permissão de Usuário: ${perm}`);
 			}
 		}
 		if(info.throttling) {
-			if(typeof info.throttling !== 'object') throw new TypeError('Command throttling must be an Object.');
+			if(typeof info.throttling !== 'object') throw new TypeError('A limitação de comando deve ser um Objeto.');
 			if(typeof info.throttling.usages !== 'number' || isNaN(info.throttling.usages)) {
-				throw new TypeError('Command throttling usages must be a number.');
+				throw new TypeError('Os usos de controle de comando devem ser um número.');
 			}
-			if(info.throttling.usages < 1) throw new RangeError('Command throttling usages must be at least 1.');
+			if(info.throttling.usages < 1) throw new RangeError('Os usos de controle de comando devem ser pelo menos 1.');
 			if(typeof info.throttling.duration !== 'number' || isNaN(info.throttling.duration)) {
-				throw new TypeError('Command throttling duration must be a number.');
+				throw new TypeError('A duração da limitação de comando deve ser um número.');
 			}
-			if(info.throttling.duration < 1) throw new RangeError('Command throttling duration must be at least 1.');
+			if(info.throttling.duration < 1) throw new RangeError('A duração da regulagem de comando deve ser pelo menos 1.');
 		}
-		if(info.args && !Array.isArray(info.args)) throw new TypeError('Command args must be an Array.');
+		if(info.args && !Array.isArray(info.args)) throw new TypeError('Os argumentos do comando devem ser uma matriz.');
 		if('argsPromptLimit' in info && typeof info.argsPromptLimit !== 'number') {
-			throw new TypeError('Command argsPromptLimit must be a number.');
+			throw new TypeError('O comando argsPromptLimit deve ser um número.');
 		}
 		if('argsPromptLimit' in info && info.argsPromptLimit < 0) {
-			throw new RangeError('Command argsPromptLimit must be at least 0.');
+			throw new RangeError('O comando argsPromptLimit deve ser pelo menos 0.');
 		}
 		if(info.argsType && !['single', 'multiple'].includes(info.argsType)) {
-			throw new RangeError('Command argsType must be one of "single" or "multiple".');
+			throw new RangeError('O comando argsType deve ser "único" ou "múltiplo".');
 		}
 		if(info.argsType === 'multiple' && info.argsCount && info.argsCount < 2) {
-			throw new RangeError('Command argsCount must be at least 2.');
+			throw new RangeError('O comando argsCount deve ter pelo menos 2.');
 		}
 		if(info.patterns && (!Array.isArray(info.patterns) || info.patterns.some(pat => !(pat instanceof RegExp)))) {
-			throw new TypeError('Command patterns must be an Array of regular expressions.');
+			throw new TypeError('Os padrões de comando devem ser uma matriz de expressões regulares.');
 		}
 	}
 }
