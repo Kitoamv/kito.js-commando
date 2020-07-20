@@ -73,7 +73,7 @@ class CommandDispatcher {
 	 * });
 	 */
 	addInhibitor(inhibitor) {
-		if(typeof inhibitor !== 'function') throw new TypeError('The inhibitor must be a function.');
+		if(typeof inhibitor !== 'function') throw new TypeError('O inibidor deve ser uma função.');
 		if(this.inhibitors.has(inhibitor)) return false;
 		this.inhibitors.add(inhibitor);
 		return true;
@@ -85,7 +85,7 @@ class CommandDispatcher {
 	 * @return {boolean} Whether the removal was successful
 	 */
 	removeInhibitor(inhibitor) {
-		if(typeof inhibitor !== 'function') throw new TypeError('The inhibitor must be a function.');
+		if(typeof inhibitor !== 'function') throw new TypeError('O inibidor deve ser uma função.');
 		return this.inhibitors.delete(inhibitor);
 	}
 
