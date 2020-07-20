@@ -179,9 +179,9 @@ class Argument {
 
 			// Prompt the user for a new value
 			prompts.push(await msg.reply(stripIndents`
-				${empty ? this.prompt : valid ? valid : `Você forneceu um comando inválido ${this.label}. Por favor, tente novamente.`}
+				${empty ? this.prompt : valid ? valid : `Você forneceu um inválido ${this.label}. Por favor, tente novamente.`}
 				${oneLine`
-					Responda com \`cancelar\` para cancelar o comando.
+					Responda com \`cancel\` para cancelar o comando.
 					${wait ? `O comando será automaticamente cancelado em ${this.wait} segundos.` : ''}
 				`}
 			`));
@@ -265,12 +265,12 @@ class Argument {
 					const escaped = escapeMarkdown(value).replace(/@/g, '@\u200b');
 					prompts.push(await msg.reply(stripIndents`
 						${valid ? valid : oneLine`
-							Você forneceu um comando inválido ${this.label},
+							Você forneceu um inválido ${this.label},
 							"${escaped.length < 1850 ? escaped : '[muito tempo para mostrar]'}".
 							Por favor, tente novamente.
 						`}
 						${oneLine`
-							Responder com \`cancelar\` para cancelar o comando, ou \`terminar\` para concluir a entrada até este ponto.
+							Responda com \`cancel\` para cancelar o comando ou \`finish\` para concluir a entrada até este ponto.
 							${wait ? `O comando será automaticamente cancelado em ${this.wait} segundos.` : ''}
 						`}
 					`));
@@ -278,7 +278,7 @@ class Argument {
 					prompts.push(await msg.reply(stripIndents`
 						${this.prompt}
 						${oneLine`
-							Responda com \`cancelar\` para cancelar o comando ou \`terminar\` para finalizar a entrada.
+							Responda com \`cancel\` para cancelar o comando ou \`finish\` para finalizar a entrada.
 							${wait ? `O comando será automaticamente cancelado em ${this.wait} segundos, a menos que você responda.` : ''}
 						`}
 					`));
@@ -385,9 +385,9 @@ class Argument {
 	 * @private
 	 */
 	static validateInfo(client, info) {
-		if(!client) throw new Error('O cliente do argumento deve ser especificado.');
-		if(typeof info !== 'object') throw new TypeError('As informações do argumento devem ser um objeto.');
-		if(typeof info.key !== 'string') throw new TypeError('A chave do argumento deve ser uma sequência.');
+		if(!client) throw new Error('Um cliente deve ser especificado.');
+		if(typeof info !== 'object') throw new TypeError('As informações do comando devem ser um objeto.');
+		if(typeof info.key !== 'string') throw new TypeError('O nome do comando deve ser uma sequência.');
 		if(info.label && typeof info.label !== 'string') throw new TypeError('O rótulo do argumento deve ser uma sequência.');
 		if(typeof info.prompt !== 'string') throw new TypeError('O prompt do argumento deve ser uma sequência.');
 		if(info.error && typeof info.error !== 'string') throw new TypeError('O erro de argumento deve ser uma sequência.');
@@ -396,7 +396,7 @@ class Argument {
 			throw new RangeError(`Tipo de argumento "${info.type}" não está registrado.`);
 		}
 		if(!info.type && !info.validate) {
-			throw new Error('O argumento deve ter "type" ou "validate" especificado.');
+			throw new Error('O argumento deve ter "tipo" ou "validar" especificado.');
 		}
 		if(info.validate && typeof info.validate !== 'function') {
 			throw new TypeError('A validação de argumento deve ser uma função.');
