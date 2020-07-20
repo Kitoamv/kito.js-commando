@@ -68,7 +68,7 @@ class CommandRegistry {
 	 * @return {CommandRegistry}
 	 */
 	registerGroups(groups) {
-		if(!Array.isArray(groups)) throw new TypeError('Groups must be an Array.');
+		if(!Array.isArray(groups)) throw new TypeError('Os grupos devem ser uma matriz.');
 		for(let group of groups) {
 			if(typeof group === 'function') {
 				group = new group(this.client); // eslint-disable-line new-cap
@@ -81,7 +81,7 @@ class CommandRegistry {
 			const existing = this.groups.get(group.id);
 			if(existing) {
 				existing.name = group.name;
-				this.client.emit('debug', `Group ${group.id} is already registered; renamed it to "${group.name}".`);
+				this.client.emit('debug', `Grupo ${group.id} já está registrado; renomeou para "${group.name}".`);
 			} else {
 				this.groups.set(group.id, group);
 				/**
@@ -91,7 +91,7 @@ class CommandRegistry {
 				 * @param {CommandRegistry} registry - Registry that the group was registered to
 				 */
 				this.client.emit('groupRegister', group, this);
-				this.client.emit('debug', `Registered group ${group.id}.`);
+				this.client.emit('debug', `Grupo registrado ${group.id}.`);
 			}
 		}
 		return this;
@@ -113,29 +113,29 @@ class CommandRegistry {
 	 * @return {CommandRegistry}
 	 */
 	registerCommands(commands) {
-		if(!Array.isArray(commands)) throw new TypeError('Commands must be an Array.');
+		if(!Array.isArray(commands)) throw new TypeError('Os comandos devem ser uma matriz.');
 		for(let command of commands) {
 			if(typeof command === 'function') command = new command(this.client); // eslint-disable-line new-cap
 
 			// Verify that it's an actual command
 			if(!(command instanceof Command)) {
-				this.client.emit('warn', `Attempting to register an invalid command object: ${command}; skipping.`);
+				this.client.emit('warn', `Tentativa de registrar um objeto de comando inválido: ${command}; pulando.`);
 				continue;
 			}
 
 			// Make sure there aren't any conflicts
 			if(this.commands.some(cmd => cmd.name === command.name || cmd.aliases.includes(command.name))) {
-				throw new Error(`A command with the name/alias "${command.name}" is already registered.`);
+				throw new Error(`Um comando com o nome/alias "${command.name}" já está registrado.`);
 			}
 			for(const alias of command.aliases) {
 				if(this.commands.some(cmd => cmd.name === alias || cmd.aliases.includes(alias))) {
-					throw new Error(`A command with the name/alias "${alias}" is already registered.`);
+					throw new Error(`Um comando com o nome/alias "${alias}" já está registrado.`);
 				}
 			}
 			const group = this.groups.find(grp => grp.id === command.groupID);
-			if(!group) throw new Error(`Group "${command.groupID}" is not registered.`);
+			if(!group) throw new Error(`Grupo "${command.groupID}" não está registrado.`);
 			if(group.commands.some(cmd => cmd.memberName === command.memberName)) {
-				throw new Error(`A command with the member name "${command.memberName}" is already registered in ${group.id}`);
+				throw new Error(`Um comando com o nome do membro "${command.memberName}" já está registrado em ${group.id}`);
 			}
 
 			// Add the command
@@ -149,7 +149,7 @@ class CommandRegistry {
 			 * @param {CommandRegistry} registry - Registry that the command was registered to
 			 */
 			this.client.emit('commandRegister', command, this);
-			this.client.emit('debug', `Registered command ${group.id}:${command.memberName}.`);
+			this.client.emit('debug', `Comando registrado ${group.id}:${command.memberName}.`);
 		}
 
 		return this;
@@ -195,12 +195,12 @@ class CommandRegistry {
 
 			// Verify that it's an actual type
 			if(!(type instanceof ArgumentType)) {
-				this.client.emit('warn', `Attempting to register an invalid argument type object: ${type}; skipping.`);
+				this.client.emit('warn', `Tentativa de registrar um objeto do tipo argumento inválido: ${type}; saltando.`);
 				continue;
 			}
 
 			// Make sure there aren't any conflicts
-			if(this.types.has(type.id)) throw new Error(`An argument type with the ID "${type.id}" is already registered.`);
+			if(this.types.has(type.id)) throw new Error(`Um tipo de argumento com o ID "${type.id}" já está registrado.`);
 
 			// Add the type
 			this.types.set(type.id, type);
@@ -211,7 +211,7 @@ class CommandRegistry {
 			 * @param {CommandRegistry} registry - Registry that the type was registered to
 			 */
 			this.client.emit('typeRegister', type, this);
-			this.client.emit('debug', `Registered argument type ${type.id}.`);
+			this.client.emit('debug', `Tipo de argumento registrado ${type.id}.`);
 		}
 
 		return this;
@@ -337,7 +337,7 @@ class CommandRegistry {
 		 * @param {Command} oldCommand - Old command
 		 */
 		this.client.emit('commandReregister', command, oldCommand);
-		this.client.emit('debug', `Reregistered command ${command.groupID}:${command.memberName}.`);
+		this.client.emit('debug', `Comando registrado novamente ${command.groupID}:${command.memberName}.`);
 	}
 
 	/**
@@ -353,7 +353,7 @@ class CommandRegistry {
 		 * @param {Command} command - Command that was unregistered
 		 */
 		this.client.emit('commandUnregister', command);
-		this.client.emit('debug', `Unregistered command ${command.groupID}:${command.memberName}.`);
+		this.client.emit('debug', `Comando não registrado ${command.groupID}:${command.memberName}.`);
 	}
 
 	/**
